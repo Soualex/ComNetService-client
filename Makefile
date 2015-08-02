@@ -1,6 +1,6 @@
 export CC=	g++
 export CFLAGS=	-W -Wall -ansi -pedantic
-export LFLAGS=	-lsfml-network -lsfml-window -lsfml-system
+export LFLAGS=	-lsfml-network -lsfml-graphics -lsfml-window -lsfml-system
 BIN_DIR=	./bin/
 SRC_DIR=	./src/
 INCLUDE_DIR=	./include/

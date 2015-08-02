@@ -1,64 +1,35 @@
 #include <iostream>
 #include <cstdio>
-#include <SFML/Network.hpp>
+#include "Network/Network.h"
 
 using namespace std;
 using namespace sf;
 
 int main()
 {
-    TcpSocket socket;
-    Socket::Status socket_status;
+    AppWindow app_window;
+    Network network;
 
-    socket_status = socket.connect("127.0.0.1", 9983);
-    socket.setBlocking(false);
+    app_window.create(VideoMode(800, 600), "ComNetService");
 
-    if (socket_status == Socket::Done)
+    while (app_window.isOpen())
     {
-        cout << "Server address : " << socket.getRemoteAddress() << endl;
-        cout << "Server port : " << socket.getRemotePort() << endl;
-    }
-    else
-    {
-        cout << "Connection error !" << endl;
-    }
+        if (network.isConnected())
+        {
 
-
-    while (socket_status == Socket::Done)
-    {
-                string message;
-                Packet packet;
-
-                if (socket.receive(packet) == Socket::Done)
-                {
-                    if (packet >> message)
-                    {
-                        cout << message << endl;
-                    }
-                    else
-                    {
-                        cout << "Message could not be read !" << endl;
-                    }
-                }
+        }
         else
         {
-            Packet packet;
-            string message;
+            LoginWindow login_window;
 
-            cout << "Votre message : ";
-            cin >> message;
-            packet << message;
-            
-            if (socket.send(packet) != Socket::Done)
+            login_window.create(VideoMode(800, 600), "Connexion");
+
+            while (login_window.isOpen())
             {
-                cout << "Failed to sent the message..." << endl;
-            }
-            else
-            {
-                cout << "Message sent !" << endl;
+                
             }
         }
     }
 
-  return 0;
+    return 0;
 }
